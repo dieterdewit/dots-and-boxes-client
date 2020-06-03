@@ -1,9 +1,5 @@
 const fs = require('fs')
-
-const test_board = [
-    [99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99],
-    [99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99]
-]
+const min_max = require('./minMax')
 
 const EMPTY = 99
 
@@ -29,7 +25,7 @@ function find_parent(translated_board_lenght, node2_count, parent_iters){
     }
 }
 
-function look_ahead(k, board, turnId) {
+module.exports = function look_ahead(k, board, turnId) {
     let translated_board = board_translate(false, board);
     const translated_board_lenght = translated_board.length
 
@@ -45,10 +41,11 @@ function look_ahead(k, board, turnId) {
     let k1_turn = {}
     let node_count = 0
 
-    let k2_board;
+    let k2_board = [];
     let k2_node = {}
     let k2_turn = {}
     let node2_count = 0
+    let second_turn_mine;
 
     fs.unlink('data/Look_Ahead_1.json', function (err) {
         if (err) console.log("No such file, 'data/Look_Ahead_1.json'. File will be created...");
@@ -69,12 +66,18 @@ function look_ahead(k, board, turnId) {
                     k1_turn["Array"] = 1;
                 }
                 k1_node["Node" + node_count] = k1_turn
-                if (turnId === 1){
-                    k1_turn["Turn"] = 2
+                if (k1 < Math.ceil(translated_board_lenght / 2)){
+                    k1_turn["Position"] = k1
                 }
-                else if (turnId === 2) {
-                    k1_turn["Turn"] = 1
+                else {
+                    k1_turn["Position"] = k1 - Math.ceil(translated_board_lenght / 2)
                 }
+                let minMax_values = min_max(board, board_translate(true, translated_board), true)
+                k1_turn["Heuristic"] = minMax_values[1]
+                k1_turn["Useful"] = minMax_values[2]
+                second_turn_mine = minMax_values[3]
+                k1_turn["Mine"] = true
+
                 k2_board = translated_board
                 translated_board = board_translate(false, board);
                 node_count = node_count + 1;
@@ -97,7 +100,18 @@ function look_ahead(k, board, turnId) {
                         let parent_iters = calculate_iterations - 1
 
                         k2_turn["Parent"] = "Node" + find_parent(translated_board_lenght, node2_count, parent_iters)
-                        k2_turn["Turn"] = turnId
+                        if (k2 < Math.ceil(translated_board_lenght / 2)){
+                            k2_turn["Position"] = k2
+                        }
+                        else {
+                            k2_turn["Position"] = k2 - Math.ceil(translated_board_lenght / 2)
+                        }
+
+                        let minMax2_values = min_max(board_translate(true, k2_board), board_translate(true, k2_board_iter), second_turn_mine)
+                        k2_turn["Heuristic"] = minMax2_values[1]
+                        k2_turn["Useful"] = minMax2_values[2]
+                        k2_turn["Mine"] = second_turn_mine
+
                         k2_board_iter = k2_board.concat()
                         node2_count = node2_count + 1;
                         k2_turn = {}
@@ -113,5 +127,3 @@ function look_ahead(k, board, turnId) {
         if (err) throw err;
     })
 }
-
-look_ahead(2, test_board, 1)

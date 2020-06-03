@@ -1,7 +1,7 @@
 const socket = require('socket.io-client')('http://127.0.0.1:51234');
 const movement = require('./min_max/evalueate_move')
 const tournamentID = 12;
-const user_name = 'Dieter de Wit';
+const user_name = 'Pascalito';
 const current_time = new Date();
 
 /*
