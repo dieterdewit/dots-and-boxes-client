@@ -20,6 +20,7 @@ module.exports = function movement(board, turnId) {
     let min_max_diff;
 
     for (let [key, value] of Object.entries(k1)) {
+        let countKey = Object.keys(k1).length;
         for (let [k, v] of Object.entries(k2)) {
             if (value.Useful === 'Yes' && v.Useful === 'Yes' && v.Mine === true && key === v.Parent) {
                 max.push([v.Heuristic, value.Array, value.Position])
@@ -37,6 +38,12 @@ module.exports = function movement(board, turnId) {
                 min.push([v.Heuristic, value.Array, value.Position])
                 min_max_diff = 'min';
             }
+        }
+        if (countKey === 1){
+            let array = value.Array
+            let position = value.Position
+            console.log([array, position])
+            return [parseInt(array), parseInt(position)]
         }
     }
     if (min_max_diff === 'max'){
@@ -62,5 +69,8 @@ module.exports = function movement(board, turnId) {
         let position = min[minimum][2]
         console.log([array, position])
         return [parseInt(array), parseInt(position)]
+    }
+    else {
+        console.log("ERROR !!!")
     }
 }

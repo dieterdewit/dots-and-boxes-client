@@ -4,24 +4,26 @@ const tournamentID = 12;
 const user_name = 'Pascalito';
 const current_time = new Date();
 
-/*
+
 const board = [
     [
         0,  0,  0,  0,  0,  0,  0,  0,  0,
-        0,  0,  0, 99, 99, 99, 99, 99, 99,
+        0,  0,  0,  0, 99, 99, 99, 99, 99,
         99, 99, 99, 99, 99, 99, 99, 99, 99,
         99, 99, 99
     ],
     [
+        0, 99, 99,  0,  0,  0,  0, 99,  0,
         0, 99, 99, 99, 99, 99, 99, 99, 99,
-        99, 99, 99, 99, 99, 99, 99, 99, 99,
         99, 99, 99, 99, 99, 99, 99, 99, 99,
         99, 99, 99
     ]
 ]
 
+
 movement(board, 1)
- */
+
+
 
 socket.on('connect',function(){
     // Client has connected to server
