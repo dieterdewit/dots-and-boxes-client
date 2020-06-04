@@ -2,8 +2,8 @@
 Dots and Boxes Player with Artificial Intelligence developed in JavaScript 
 
 ## RUN: 
-   npm install
-   node client.js
+     npm install
+     node client.js
    
 ### Details
 **min_max** directory containes the code for the artificial intelligence. 
