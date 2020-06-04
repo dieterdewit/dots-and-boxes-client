@@ -6,10 +6,10 @@ Dots and Boxes Player with Artificial Intelligence developed in JavaScript
      node client.js
    
 ### Details
-**min_max** directory containes the code for the artificial intelligence. 
-***k-look_ahead.js*** constructs the minMax tree. The current configuration has k = 2, files for the minMax tree get saved in '/data' dir. 
-***minMax.js*** calculates the Heuristic of every Node and Children-Node, and Prunes unnecesary values of alpha/beta.
-***evalueate_move.js*** loads data from look-ahead files, computes Max() over node's Heuristic when it is my turn and Min() when it is not
+**min_max** directory containes the code for the artificial intelligence. <br/>
+***k-look_ahead.js*** constructs the minMax tree. The current configuration has k = 2, files for the minMax tree get saved in '/data' dir. <br/>
+***minMax.js*** calculates the Heuristic of every Node and Children-Node, and Prunes unnecesary values of alpha/beta. <br/>
+***evalueate_move.js*** loads data from look-ahead files, computes Max() over node's Heuristic when it is my turn and Min() when it is not <br/>
 
 ### Look-Ahead Data
 * Board: The Board to be played on the next turn 
