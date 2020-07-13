@@ -20,3 +20,10 @@ Dots and Boxes Player with Artificial Intelligence developed in JavaScript
 * Useful: Value for Alpha/Beta Pruning, If Parent Node has 'Useful'='Yes' then 'Maybe' is not evaluated and you can Imply that the next turn is yours also. If value of Children is 'Yes' then no 'Maybe' is evaluated, 'Maybe' is only evaluated in conditions where no movement can generate points on Max (Like at the begginig of the game), that means Parent-Heuristic === Children-Heuristic, Otherwise, only 'Yes' nodes are relevant and searched.
 * Mine: Indicates if turn is mine *true* of *false* if its not. 
 
+
+### SERVER:
+**Run the Server to connect multiple Clients** <br/>
+https://github.com/samuelchvez/open-1v1-board-game-coordinator <br/>
+
+**Run Tournament Admin to start game** <br/>
+https://github.com/samuelchvez/open-1v1-board-game-coordinator-admin
